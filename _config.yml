@@ -2,7 +2,7 @@
 title: Bz Blog
 SEOTitle: 徐文强的博客 | Bz Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
+email: since480@163.com
 description: "关于后端与设计、黑客与诗 | 徐文强，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Bz徐文强 的个人博客，与你一起发现更大的世界。"
 keyword: "徐文强, Bz徐文强, Bz, xuwenqiang, , @xuwenqiang, 徐文强的博客, Bz Blog, 博客, 个人网站, 互联网, 后端, 设计"
 url: "https://huangxuan.me"              # your host, for absolute URL
@@ -12,10 +12,10 @@ baseurl: ""                             # for example, '/blog' if your blog host
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+weibo_username:     since480
+zhihu_username:     bao-bao-da-ren-5-55
+github_username:    DuDuLuuu
+twitter_username:   Bz Xu
 #facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
@@ -33,7 +33,7 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 
 
