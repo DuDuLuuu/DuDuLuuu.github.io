@@ -1,0 +1,101 @@
+public class Message implements Serializable{
+	属性
+	private String topic;
+    private int flag;
+    private Map<String, String> properties;
+    private byte[] body;
+    private String transactionId;
+	构造方法：tags、keys 默认为"",flag 默认为0
+	public Message(String topic, String tags, String keys, int flag, byte[] body, boolean waitStoreMsgOK) {
+        this.topic = topic;
+        this.flag = flag;
+        this.body = body;
+        if (tags != null && tags.length() > 0) {
+            this.setTags(tags);
+        }
+
+        if (keys != null && keys.length() > 0) {
+            this.setKeys(keys);
+        }
+        this.setWaitStoreMsgOK(waitStoreMsgOK);
+		//向properties这个Map中put("TAGS",Boolean.toString(tags));
+		//向properties这个Map中put("KEYS",Boolean.toString(keys));
+		//向properties这个Map中put("WAIT",Boolean.toString(waitStoreMsgOK));
+    }
+	普通方法：
+	public void setKeys(String keys)
+	public void putUserProperty(String name, String value) {
+		//可以设置自定义key-value到properties中，前提是键值对有意义(非空非空字符串)且key不能与系统内置keys相同
+	}
+	public String getUserProperty(String name)//调用下面一个
+	public String getProperty(String name)
+	public String getTopic()
+	public void setTopic(String topic)
+	public String getTags()
+	public void setTags(String tags)
+	public String getKeys()
+	public void setKeys(Collection<String> keys)//集合用空格拼接当做value 
+	public int getDelayTimeLevel()//默认为0
+	public void setDelayTimeLevel(int level)
+	public boolean isWaitStoreMsgOK()//默认true
+	public void setWaitStoreMsgOK(boolean waitStoreMsgOK)
+	public int getFlag()
+	public void setFlag(int flag)
+	public byte[] getBody()
+	public void setBody(byte[] body)
+	public Map<String, String> getProperties()
+	void setProperties(Map<String, String> properties)
+	public String getBuyerId()
+	public void setBuyerId(String buyerId)
+	public String getTransactionId()
+	public void setTransactionId(String transactionId)
+	public String toString() {
+        return "Message{
+			topic='" + this.topic + '\'' + ", 
+			flag=" + this.flag + ", 
+			properties=" + this.properties + ", 
+			body=" + Arrays.toString(this.body) + ", 
+			transactionId='" + this.transactionId + '\'' + '
+			}';
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

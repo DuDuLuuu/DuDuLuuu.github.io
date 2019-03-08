@@ -1,0 +1,4 @@
+ClientConfig --- vipChannelEnabled无效
+
+Producer Group 作用：如果组内一台producer宕机，broker会从同group其他producer查在事务中的代码应该commit还是rollback
+				问题：开源版本对事务消息的代码被阉割 不完全支持事务消息
