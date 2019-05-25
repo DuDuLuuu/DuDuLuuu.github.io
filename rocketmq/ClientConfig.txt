@@ -1,0 +1,37 @@
+public class ClientConfig {
+属性
+
+	public static final String SEND_MESSAGE_WITH_VIP_CHANNEL_PROPERTY = "com.rocketmq.sendMessageWithVIPChannel";
+	//NameServer地址列表，-D系统参数rocketmq.namesrv.addr或环境变量NAMESRV_ADDR
+    private String namesrvAddr = System.getProperty(MixAll.NAMESRV_ADDR_PROPERTY, System.getenv(MixAll.NAMESRV_ADDR_ENV));
+	//客户端ip
+    private String clientIP = RemotingUtil.getLocalAddress();
+	//客户端实例名 -D系统参数rocketmq.client.name获取
+    private String instanceName = System.getProperty("rocketmq.client.name", "DEFAULT");
+	//客户端的执行任务线程数量由硬件决定
+    private int clientCallbackExecutorThreads = Runtime.getRuntime().availableProcessors();
+	//客户端从NameServer获取路由信息的最大时间间隔：30秒
+    private int pollNameServerInterval = 1000 * 30;
+    //定时发送心跳到Broker的最大时间间隔：30秒
+    private int heartbeatBrokerInterval = 1000 * 30;
+	//持久化消费信息进度间隔时间：5秒
+    private int persistConsumerOffsetInterval = 1000 * 5;
+    private boolean unitMode = false;
+    private String unitName;
+	//是否启用vip netty通道以发送消息
+    private boolean vipChannelEnabled = Boolean.parseBoolean(System.getProperty(SEND_MESSAGE_WITH_VIP_CHANNEL_PROPERTY, "true"));
+
+    private boolean useTLS = TlsSystemConfig.tlsEnable;
+
+    private LanguageCode language = LanguageCode.JAVA;
+
+namesrvAddr
+
+
+
+pollNameServerInterval
+heartbeatBrokerInterval
+clientCallbackExecutorThreads
+
+
+}

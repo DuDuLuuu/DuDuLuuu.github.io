@@ -4,7 +4,7 @@
     padding-right: 5%;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .post-container {
     padding-right: 5%;
   }
@@ -692,7 +692,7 @@ pre code {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 150px 0;
+    padding: 5px 0;
   }
 }
 .intro-header .site-heading {
@@ -1258,4 +1258,8 @@ img::-moz-selection {
 }
 .page-fullscreen footer .copyright a:hover {
   color: #ddd;
+}
+.post-row {
+  margin-right: -180px;
+  margin-left: -280px;
 }
