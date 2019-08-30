@@ -15,7 +15,6 @@ tags:
 
 
 ```
-
 /**
  * CountDownLatch：某线程调用await()阻塞，直到其他线程调用countDown()累计到指定参数次数才唤醒被阻塞线程
  *
@@ -32,7 +31,8 @@ public class CountDownLatchDemo {
             final int index=i;
             threadPool.execute(() -> {
                 String currentThread = Thread.currentThread().toString();
-                System.out.println(String.format("当前线程:{%s},开始", currentThread));
+                System.out.println("当前线程:"+currentThread+",开始");
+
                 try {
                     TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
@@ -41,25 +41,25 @@ public class CountDownLatchDemo {
                 if (index <stopCount) {
                     //累加
                     countDownLatch.countDown();
-                    System.out.println(String.format("--->当前线程:{%s},调用 countDown()",currentThread));
+                    System.out.println("--->当前线程:"+currentThread+",调用 countDown()");
                 }
                 try {
                     TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(String.format("--->当前线程:{%s},结束", currentThread));
+                System.out.println("--->当前线程:"+currentThread+",结束");
 
             });
         }
-        System.out.println(String.format("==============等待{%d}个线程调用CountDown()：当前线程阻塞==============", stopCount));
+        System.out.println("==============等待"+stopCount+"个线程调用CountDown()：当前线程阻塞==============");
         try {
             //进入阻塞
             countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(String.format("=============={%d}个线程调用CountDown()：当前线程唤醒==============", stopCount));
+        System.out.println("=============="+stopCount+"个线程调用CountDown()：当前线程唤醒==============");
         threadPool.shutdown();
     }
 }

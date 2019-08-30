@@ -31,18 +31,11 @@ public class CyclicBarrierDemo {
             final int index = i;
             threadPool.execute(() -> {
                 String currentThread = Thread.currentThread().toString();
-                System.out.println(String.format("当前线程:{%s},开始", currentThread));
-                try {
-                    TimeUnit.SECONDS.sleep( 2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (index <continueCount-1 && cyclicBarrier.isBroken() != true) {
+                System.out.println("当前线程:"+currentThread+",开始");
+                if (index <continueCount-1 ) {
                     try {
-                        System.out.println(String.format("当前线程:{%s}，进入阻塞等待唤醒",currentThread));
+                        System.out.println("当前线程:"+currentThread+"，进入阻塞等待唤醒");
                         cyclicBarrier.await();
-                        //阻塞的线程唤醒后再睡一会
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (BrokenBarrierException e) {
@@ -56,20 +49,22 @@ public class CyclicBarrierDemo {
                     e.printStackTrace();
                 }
 
-                System.out.println(String.format("--->当前线程:{%s},结束", currentThread));
+                System.out.println("--->当前线程:"+currentThread+",结束");
             });
 
         }
 
-        System.out.println(String.format("==============等待{%d}个线程进入阻塞状态==============", continueCount-1));
+        System.out.println("==============等待"+(continueCount-1)+"个线程进入阻塞状态==============");
         try {
+            TimeUnit.SECONDS.sleep(5);
+            System.out.println("当前进入阻塞的线程数量为："+cyclicBarrier.getNumberWaiting());
             cyclicBarrier.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (BrokenBarrierException e) {
             e.printStackTrace();
         }
-        System.out.println(String.format("=============={%d}个线程进入阻塞状态：唤醒==============", continueCount-1));
+        System.out.println("=============="+(continueCount-1)+"个线程进入阻塞状态：唤醒==============");
 
 
         threadPool.shutdown();
