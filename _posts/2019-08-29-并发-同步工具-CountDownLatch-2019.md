@@ -2,7 +2,7 @@
 layout:     post
 title:      "并发-同步工具-CountDownLatch"
 subtitle:   " \"keep hungry keep foolish\""
-date:       2019-05-25 12:00:00
+date:       2019-08-29 12:00:00
 author:     "Bz"
 header-img: "img/post-bg-2015.jpg"
 catalog: true
@@ -15,6 +15,7 @@ tags:
 
 
 ```
+
 /**
  * CountDownLatch：某线程调用await()阻塞，直到其他线程调用countDown()累计到指定参数次数才唤醒被阻塞线程
  *
@@ -23,35 +24,42 @@ tags:
 public class CountDownLatchDemo {
 
     public static void main(String[] args) {
-        Integer totalCount = 10;
+        Integer totalThreadCount = 5;
         Integer stopCount = 2;
-        ExecutorService threadPool = Executors.newFixedThreadPool(totalCount);
+        ExecutorService threadPool = Executors.newFixedThreadPool(totalThreadCount);
         final CountDownLatch countDownLatch = new CountDownLatch(stopCount);
-        for (int i = 0; i < totalCount; i++) {
+        for (int i = 0; i < totalThreadCount; i++) {
+            final int index=i;
             threadPool.execute(() -> {
                 String currentThread = Thread.currentThread().toString();
                 System.out.println(String.format("当前线程:{%s},开始", currentThread));
-                Random random = new Random();
-                int sleepTime = random.nextInt(5) + 1;
                 try {
-                    TimeUnit.SECONDS.sleep(sleepTime);
+                    TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
+                if (index <stopCount) {
+                    //累加
+                    countDownLatch.countDown();
+                    System.out.println(String.format("--->当前线程:{%s},调用 countDown()",currentThread));
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(String.format("--->当前线程:{%s},结束", currentThread));
-                //累加
-                countDownLatch.countDown();
+
             });
         }
-        System.out.println(String.format("==============等待{%d}个线程结束==============", stopCount));
+        System.out.println(String.format("==============等待{%d}个线程调用CountDown()：当前线程阻塞==============", stopCount));
         try {
-            //进入阻塞 
+            //进入阻塞
             countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(String.format("=============={%d}个线程结束==============", stopCount));
+        System.out.println(String.format("=============={%d}个线程调用CountDown()：当前线程唤醒==============", stopCount));
         threadPool.shutdown();
     }
 }
@@ -59,28 +67,20 @@ public class CountDownLatchDemo {
 ### 运行结果
 
 ```
-==============等待{2}个线程结束==============
-当前线程:{Thread[pool-1-thread-5,5,main]},开始
 当前线程:{Thread[pool-1-thread-4,5,main]},开始
-当前线程:{Thread[pool-1-thread-3,5,main]},开始
-当前线程:{Thread[pool-1-thread-8,5,main]},开始
-当前线程:{Thread[pool-1-thread-7,5,main]},开始
-当前线程:{Thread[pool-1-thread-10,5,main]},开始
-当前线程:{Thread[pool-1-thread-6,5,main]},开始
-当前线程:{Thread[pool-1-thread-9,5,main]},开始
-当前线程:{Thread[pool-1-thread-1,5,main]},开始
+当前线程:{Thread[pool-1-thread-5,5,main]},开始
 当前线程:{Thread[pool-1-thread-2,5,main]},开始
---->当前线程:{Thread[pool-1-thread-4,5,main]},结束
---->当前线程:{Thread[pool-1-thread-5,5,main]},结束
-=============={2}个线程结束==============
---->当前线程:{Thread[pool-1-thread-6,5,main]},结束
---->当前线程:{Thread[pool-1-thread-1,5,main]},结束
+==============等待{2}个线程调用CountDown()：当前线程阻塞==============
+当前线程:{Thread[pool-1-thread-3,5,main]},开始
+当前线程:{Thread[pool-1-thread-1,5,main]},开始
+--->当前线程:{Thread[pool-1-thread-1,5,main]},调用 countDown()
+--->当前线程:{Thread[pool-1-thread-2,5,main]},调用 countDown()
+=============={2}个线程调用CountDown()：当前线程唤醒==============
 --->当前线程:{Thread[pool-1-thread-3,5,main]},结束
---->当前线程:{Thread[pool-1-thread-7,5,main]},结束
---->当前线程:{Thread[pool-1-thread-9,5,main]},结束
---->当前线程:{Thread[pool-1-thread-8,5,main]},结束
 --->当前线程:{Thread[pool-1-thread-2,5,main]},结束
---->当前线程:{Thread[pool-1-thread-10,5,main]},结束
+--->当前线程:{Thread[pool-1-thread-5,5,main]},结束
+--->当前线程:{Thread[pool-1-thread-4,5,main]},结束
+--->当前线程:{Thread[pool-1-thread-1,5,main]},结束
 
 ```
 
