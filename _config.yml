@@ -2,7 +2,7 @@
 title: Bz Blog
 SEOTitle: 徐文强的博客 | Bz Blog
 header-img: img/home-bg.jpg
-email: since480@163.com
+email: 598570789@qq.com
 description: "关于后端与设计、黑客与诗 | 徐文强，Web & Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Bz徐文强 的个人博客，与你一起发现更大的世界。"
 keyword: "徐文强, Bz徐文强, Bz, xuwenqiang, , @xuwenqiang, 徐文强的博客, Bz Blog, 博客, 个人网站, 互联网, 后端, 设计"
 url: "https://huangxuan.me"              # your host, for absolute URL
@@ -67,7 +67,7 @@ ga_domain: huangxuan.me
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
+sidebar-about-description: "真正的自由是随时随地<br>都拥有选择的权利"
 sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
